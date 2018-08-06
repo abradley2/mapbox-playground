@@ -1,0 +1,60 @@
+{
+  "name": "elm-ui-fun",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:client": "budo client/main.js:bundle.js --live --dir ./static -- -t [ hbsfy -e hbs ]",
+    "dev:api": "PORT=5000 NODE_ENV=development nodemon ./api/index.js | pino-colada",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:api\"",
+    "start:client": "browserify ./client/main.js -t [ hbsfy -e hbs ] -o ./static/bundle.js && uglifyjs ./static/bundle.js -o ./static/bundle.js",
+    "start:api": "NODE_ENV=production node api/index.js",
+    "start": "npm run start:client && npm run start:api",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@abradley2/koa-validated-route": "^1.0.1",
+    "@koa/cors": "^2.2.1",
+    "aphrodite": "^2.2.2",
+    "baconjs": "^2.0.9",
+    "concurrently": "^3.5.1",
+    "cuid": "^2.1.1",
+    "elm-live": "^2.7.5",
+    "handlebars": "^4.0.11",
+    "hbsfy": "^2.8.1",
+    "jsonwebtoken": "^8.2.1",
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-static": "^4.0.2",
+    "pino": "^4.16.1",
+    "pino-colada": "^1.4.4",
+    "uglify-js": "^2.8.29"
+  },
+  "xo": {
+    "envs": [
+      "node",
+      "browser"
+    ],
+    "ignore": [
+      "public/main.bundle.js",
+      "public/bundle.js"
+    ],
+    "semicolon": false,
+    "space": 4
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3",
+    "xo": "^0.20.3"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "./node_modules/*",
+      "./elm_stuff/*",
+      "./client/*",
+      "./.git/*",
+      "./static/local-config.js"
+    ]
+  }
+}

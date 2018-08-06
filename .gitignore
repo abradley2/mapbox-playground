@@ -1,0 +1,5 @@
+local*
+elm-stuff/
+node_modules/
+elm.js
+static/bundle.js
